@@ -54,13 +54,23 @@ app.get('/api/persons/:id', (req, res) => {
 
 app.post('/api/persons', (req, res) => {
   const body = req.body
-  const newPerson = {
-    id: Math.floor(Math.random() * 9999) + 5,
-    name: body.name,
-    number: body.number
+  if (!body) {
+    res.status(400).json({ error: 'content missing' })
+  } else if (!body.name) {
+    res.status(400).json({ error: 'name must be given' })
+  } else if (persons.find(person => person.name === body.name)) {
+    res.status(400).json({ error: 'name must be unique' })
+  } else if (!body.number) {
+    res.status(400).json({ error: 'number must be given' })
+  } else {
+    const newPerson = {
+      id: Math.floor(Math.random() * 9999) + 5,
+      name: body.name,
+      number: body.number
+    }
+    persons = persons.concat(newPerson)
+    res.json(newPerson)
   }
-  persons = persons.concat(newPerson)
-  res.json(newPerson)
 })
 
 app.delete('/api/persons/:id', (req, res) => {
