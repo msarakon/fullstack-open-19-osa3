@@ -1,0 +1,24 @@
+{
+  "name": "fullstack-open-19-osa3",
+  "version": "1.0.0",
+  "description": "part 3 of full stack open 2019 exercises",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msarakon/fullstack-open-19-osa3.git"
+  },
+  "author": "Minna Sarakontu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/msarakon/fullstack-open-19-osa3/issues"
+  },
+  "homepage": "https://github.com/msarakon/fullstack-open-19-osa3#readme"
+}
