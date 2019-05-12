@@ -20,15 +20,15 @@ if (process.argv.length === 5) {
   const person = new Person({
     name: process.argv[3],
     number: process.argv[4]
-  }) 
-  person.save().then(response => {
-    console.log('person saved!');
-    mongoose.connection.close();
+  })
+  person.save().then(() => {
+    console.log('person saved!')
+    mongoose.connection.close()
   })
 } else {
   console.log('puhelinluettelo')
   Person.find().then(persons => {
     persons.map(person => console.log(person.name, person.number))
-    mongoose.connection.close();
+    mongoose.connection.close()
   })
 }

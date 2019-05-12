@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const Person = require('./models/person')
 
-morgan.token('body', (req, res) => JSON.stringify(req.body))
+morgan.token('body', (req) => JSON.stringify(req.body))
 
 app.use(express.static('build'))
 app.use(bodyParser.json())
@@ -21,7 +21,7 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api', (req, res) => res.send('<h1>API</h1>'))
-  
+
 app.get('/api/persons', (req, res) =>
   Person.find().then(persons => res.json(persons))
 )
@@ -53,13 +53,13 @@ app.put('/api/persons/:id', (req, res, next) => {
 
 app.delete('/api/persons/:id', (req, res, next) => {
   Person.findByIdAndRemove(req.params.id)
-    .then(result => res.status(204).end())
+    .then(() => res.status(204).end())
     .catch(error => next(error))
 })
 
 const errorHandler = (error, req, res, next) => {
   console.error(error.message)
-  if (error.name === 'CastError' && error.kind == 'ObjectId') {
+  if (error.name === 'CastError' && error.kind === 'ObjectId') {
     return res.status(400).send({ error: 'malformed id' })
   } else if (error.name === 'ValidationError') {
     return res.status(400).send({ error: error.message })
